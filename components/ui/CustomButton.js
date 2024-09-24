@@ -8,6 +8,7 @@ function CustomButton({
   rippleColor = Colors.primaryCyan,
   borderColor = "transparent",
   onPress,
+  icon,
 }) {
   return (
     <View style={styles.buttonOuterContainer}>
@@ -24,6 +25,7 @@ function CustomButton({
         android_ripple={{ color: rippleColor }}
       >
         <Text style={styles.buttonText(textColor)}>{children}</Text>
+        {icon && icon}
       </Pressable>
     </View>
   );
@@ -42,8 +44,12 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 18,
     elevation: 2,
-    borderWidth: 2, // Define border width here
-    borderColor: border, // Dynamic border color
+    borderWidth: 2,
+    borderColor: border,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 8,
   }),
   buttonText: (color) => ({
     fontFamily: "Roboto_700Bold",

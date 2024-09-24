@@ -2,27 +2,84 @@ import React, { useState } from "react";
 import {
   Text,
   View,
-  Button,
   StyleSheet,
-  TouchableOpacity,
   ScrollView,
   TextInput,
   Pressable,
+  Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+
+import { Alarm } from "../models/alarm";
 
 import { Colors } from "../constants/colors";
 import AlarmIcon from "../icons/AlarmIcon";
 import CustomCheckbox from "../components/ui/CustomCheckBox";
+import CustomPicker from "../components/ui/CustomPicker";
+import DaysOfWeek from "../components/alarms/DaysOfWeek";
+import { useAlarmsContext } from "../contexts/alarms-context";
+import CustomButton from "../components/ui/CustomButton";
+import RightArrowIcon from "../icons/RightArrowIcon";
+
+const pickerItems = [
+  {
+    label: "Reto matemático",
+    value: "math",
+  },
+  { label: "Reto de memoria", value: "memory" },
+];
 
 function CreateAlarmScreen({ navigation }) {
+  const { addAlarm, alarms } = useAlarmsContext();
   const [hour, setHour] = useState("");
   const [minute, setMinute] = useState("");
   const [meridiem, setMeridiem] = useState("AM");
-  const [isFrasesChecked, setIsFrasesChecked] = useState(false);
+  const [isPhrasesChecked, setIsPhrasesChecked] = useState(false);
+  const [isChallengesCheck, setIsChallengeChecked] = useState(false);
+  const [isMusicChecked, setIsMusicChecked] = useState(false);
+  const [selectedChallenge, setSelectedChallenge] = useState(null);
+  const [days, setDays] = useState([0, 0, 0, 0, 0, 0, 0]);
 
-  const handleFrasesCheckChange = (isChecked) => {
-    setIsFrasesChecked(isChecked);
+  const validateFormAndGetErrorMessage = () => {
+    let error = "";
+    if (hour === "" || minute === "")
+      error = "Ingresa una hora y minutos válidos";
+    if (isChallengesCheck && !selectedChallenge)
+      error += "\nSi seleccionaste la opción de retos debes escoger uno";
+    return error;
+  };
+
+  const handleSubmit = () => {
+    const error = validateFormAndGetErrorMessage();
+    if (error) return Alert.alert("Error", error);
+    const lastId = alarms.length > 0 ? alarms[alarms.length - 1].id : 0;
+    const alarm = new Alarm(
+      lastId + 1,
+      parseInt(hour, 10),
+      parseInt(minute, 10),
+      meridiem,
+      days,
+      isPhrasesChecked,
+      isChallengesCheck,
+      isMusicChecked
+    );
+    addAlarm(alarm);
+    navigation.goBack();
+  };
+
+  const handleDayToggle = (index) => {
+    const newDays = [...days];
+    newDays[index] = newDays[index] === 0 ? 1 : 0;
+    setDays(newDays);
+  };
+
+  const handlePhrasesCheckChange = (isChecked) => {
+    setIsPhrasesChecked(isChecked);
+  };
+
+  const handleSelectedChallengeCheckChange = (isChecked) => {
+    setIsChallengeChecked(isChecked);
+    setSelectedChallenge(null);
   };
 
   const handleHourChange = (text) => {
@@ -155,10 +212,55 @@ function CreateAlarmScreen({ navigation }) {
           <View style={styles.row}>
             <Text style={styles.basicInfoHeadertext}>Frases</Text>
             <CustomCheckbox
-              initialValue={isFrasesChecked}
-              onCheckChange={handleFrasesCheckChange}
+              initialValue={isPhrasesChecked}
+              onCheckChange={handlePhrasesCheckChange}
             />
           </View>
+        </View>
+        <View style={[styles.optionContainer, styles.gap]}>
+          <View style={styles.row}>
+            <Text style={styles.basicInfoHeadertext}>Retos</Text>
+            <CustomCheckbox
+              initialValue={isChallengesCheck}
+              onCheckChange={handleSelectedChallengeCheckChange}
+            />
+          </View>
+          {isChallengesCheck && (
+            <CustomPicker
+              items={pickerItems}
+              value={selectedChallenge}
+              onValueChange={(value) => setSelectedChallenge(value)}
+            />
+          )}
+        </View>
+        <View style={styles.optionContainer}>
+          <View style={styles.row}>
+            <Text style={styles.basicInfoHeadertext}>Música</Text>
+            <CustomCheckbox
+              initialValue={isMusicChecked}
+              onCheckChange={setIsMusicChecked}
+            />
+          </View>
+        </View>
+        <View style={[styles.optionContainer, styles.gap]}>
+          <View style={styles.row}>
+            <Text style={styles.basicInfoHeadertext}>Días</Text>
+          </View>
+          <DaysOfWeek
+            days={days}
+            editable={true}
+            onDayToggle={handleDayToggle}
+          />
+        </View>
+        <View style={styles.btnContainer}>
+          <CustomButton
+            onPress={handleSubmit}
+            buttonColor={Colors.primaryWhite}
+            textColor={Colors.primaryBlue}
+            icon={<RightArrowIcon color={Colors.primaryBlue} />}
+          >
+            Guardar
+          </CustomButton>
         </View>
       </ScrollView>
     </LinearGradient>
@@ -302,6 +404,20 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
+  },
+  gap: {
+    gap: 16,
+  },
+  btnContainer: {
+    marginTop: 16,
+    marginBottom: 16,
+    alignSelf: "center",
+    flexGrow: 0,
+  },
+  btnInner: {
+    flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
   },
 });

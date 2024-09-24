@@ -7,7 +7,7 @@ const daysLabels = ["L", "M", "X", "J", "V", "S", "D"];
 const DaysOfWeek = ({ days, editable, onDayToggle }) => {
   return (
     <View style={styles.container}>
-      {days.map((active, index) => {
+      {days?.map((active, index) => {
         const dayStyle = active ? styles.dayActive : styles.dayInactive;
         const textStyle = [
           styles.dayText,

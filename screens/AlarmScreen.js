@@ -14,10 +14,12 @@ function ListItemSeparator() {
 
 function AlarmScreen({ navigation }) {
   const { alarms } = useAlarmsContext();
+
   return (
     <LinearGradient
       colors={[Colors.primaryBlack, Colors.primaryBlue]}
       style={styles.rootScreen}
+      x
     >
       <View style={styles.mainContainer}>
         <View style={styles.header}>
@@ -28,12 +30,14 @@ function AlarmScreen({ navigation }) {
             +
           </CustomButton>
         </View>
-        <FlatList
-          data={alarms}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => <AlarmItem alarm={item} />}
-          ItemSeparatorComponent={ListItemSeparator}
-        />
+        {alarms.length && (
+          <FlatList
+            data={alarms}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => <AlarmItem alarm={item} />}
+            ItemSeparatorComponent={ListItemSeparator}
+          />
+        )}
       </View>
     </LinearGradient>
   );
