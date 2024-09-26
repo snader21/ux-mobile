@@ -124,7 +124,7 @@ function CreateAlarmScreen({ navigation }) {
       <ScrollView contentContainerStyle={styles.mainContainer}>
         <View style={styles.optionContainer}>
           <View style={styles.basicInfoHeader}>
-            <AlarmIcon color={Colors.primaryWhite} />
+            <AlarmIcon color={Colors.primaryBlue} />
             <Text style={styles.basicInfoHeadertext}>Hora alarma</Text>
           </View>
           <View style={styles.timePicker}>
@@ -346,7 +346,7 @@ const styles = StyleSheet.create({
   colon: {
     fontSize: 48,
     color: Colors.primaryBlue,
-    fontFamily: "Roboto_500Regular",
+    fontFamily: "Roboto_500Medium",
   },
   meridiemContainer: {
     borderWidth: 2,

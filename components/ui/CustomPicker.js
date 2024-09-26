@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
-// import Icon from "react-native-vector-icons/MaterialIcons"; // Ensure this is installed
 import ChevronDownIcon from "../../icons/ChevronDownIcon";
 import { Colors } from "../../constants/colors";
 
@@ -19,7 +18,6 @@ const CustomPicker = ({ items, value, onValueChange }) => {
       onValueChange={onValueChange}
       style={pickerSelectStyles}
       useNativeAndroidPickerStyle={false}
-      textInputProps={{ underlineColorAndroid: Colors.primaryCyan }}
       Icon={() => <ChevronDownIcon />}
     />
   );
@@ -47,6 +45,7 @@ const pickerSelectStyles = StyleSheet.create({
     color: Colors.primaryBlue,
     paddingRight: 30,
     backgroundColor: Colors.primaryWhite,
+    outline: "none",
   },
   placeholder: {
     fontSize: 14,
