@@ -227,6 +227,7 @@ function CreateAlarmScreen({ navigation }) {
           </View>
           {isChallengesCheck && (
             <CustomPicker
+              placeholderLabel="Escoge tu reto"
               items={pickerItems}
               value={selectedChallenge}
               onValueChange={(value) => setSelectedChallenge(value)}

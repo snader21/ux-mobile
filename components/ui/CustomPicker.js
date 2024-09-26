@@ -4,9 +4,14 @@ import RNPickerSelect from "react-native-picker-select";
 import ChevronDownIcon from "../../icons/ChevronDownIcon";
 import { Colors } from "../../constants/colors";
 
-const CustomPicker = ({ items, value, onValueChange }) => {
+const CustomPicker = ({
+  items,
+  value,
+  onValueChange,
+  palceHolderLabel = "",
+}) => {
   const placeholder = {
-    label: "Escoge tu reto",
+    label: palceHolderLabel,
     value: null,
   };
 
