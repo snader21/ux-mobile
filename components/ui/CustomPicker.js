@@ -8,10 +8,10 @@ const CustomPicker = ({
   items,
   value,
   onValueChange,
-  palceHolderLabel = "",
+  placeholderLabel = "",
 }) => {
   const placeholder = {
-    label: palceHolderLabel,
+    label: placeholderLabel,
     value: null,
   };
 
