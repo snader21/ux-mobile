@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Pressable, StatusBar } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { SafeAreaView, StyleSheet } from "react-native";
+import NotImplementedScreen from "./screens/NotImplementedScreen";
 
 import {
   Roboto_300Light,
@@ -106,7 +107,7 @@ function DrawerNavigation() {
         headerTintColor: Colors.primaryWhite,
         headerTitleStyle: {
           fontFamily: "Roboto_500Medium",
-          fontSize: 24,
+          fontSize: 20,
         },
         drawerLabelStyle: {
           fontFamily: "Roboto_700Bold",
@@ -136,14 +137,14 @@ function DrawerNavigation() {
       />
       <Drawer.Screen
         name="Retos QR"
-        component={MemoryChallengeSetupScreen}
+        component={NotImplementedScreen}
         options={{
           drawerIcon: () => <QrIcon color={Colors.primaryBlue} />,
         }}
       />
       <Drawer.Screen
         name="Frases motivacionales"
-        component={MemoryChallengeSetupScreen}
+        component={NotImplementedScreen}
         options={{
           drawerIcon: () => <MessageIcon color={Colors.primaryBlue} />,
         }}
@@ -157,7 +158,7 @@ function DrawerNavigation() {
       />
       <Drawer.Screen
         name="Cambia tu contraseña"
-        component={MusicSetupScreen}
+        component={NotImplementedScreen}
         options={{
           drawerIcon: () => <KeyIcon color={Colors.primaryBlue} />,
         }}
