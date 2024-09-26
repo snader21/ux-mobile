@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     fontSize: 12,
-    marginTop: 5,
+    marginTop: 1,
+    marginBottom: 14,
     textAlign: 'center',
   },
   warningContainer: {

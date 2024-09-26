@@ -106,7 +106,10 @@ function MemoryChallengeSetupScreen() {
           <CustomAlert onClose={() => setShowWarning(false)} />
         )}
 
-        <CustomButton onPress={() => console.log("Guardado")}>GUARDAR</CustomButton>
+      <TouchableOpacity style={styles.saveButton}>
+        <Text style={styles.saveButtonText}>GUARDAR</Text>
+        <FontAwesome name="arrow-right" size={18} color="white" />
+      </TouchableOpacity>
       </View>
     </LinearGradient>
   );
@@ -158,5 +161,19 @@ const styles = StyleSheet.create({
     color: Colors.primaryWhite,
     fontSize: 14,
     textAlign: "center",
+  },
+  saveButton: {
+    flexDirection: 'row',
+    backgroundColor: '#2A2D97',
+    padding: 16,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+  },
+  saveButtonText: {
+    color: 'white',
+    fontSize: 16,
+    marginRight: 10,
   },
 });
