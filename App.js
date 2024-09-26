@@ -191,7 +191,7 @@ function BottomTabNavigation() {
           tabBarIcon: ({ focused, color, size }) => (
             <AlarmIcon
               size={focused ? 26 : 20}
-              color={focused ? Colors.primaryBlue : color}
+              color={focused ? Colors.primaryBlue : Colors.primaryGray}
             />
           ),
           headerShown: false,
@@ -204,7 +204,7 @@ function BottomTabNavigation() {
           tabBarIcon: ({ focused, color, size }) => (
             <CogIcon
               size={focused ? 36 : 30}
-              color={focused ? Colors.primaryBlue : color}
+              color={focused ? Colors.primaryBlue : Colors.primaryGray}
             />
           ),
           headerShown: false,
