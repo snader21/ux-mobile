@@ -4,4 +4,5 @@ export const Colors = {
   primaryWhite: "#FFFFFF",
   primaryGray: "#B7C1D5",
   primaryBlack: "#000000",
+  errorPink: "#F7128E"
 };
